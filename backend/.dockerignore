@@ -9,6 +9,7 @@ venv/
 .git/
 .gitignore
 .vscode/
-*.pkl
+# Removed *.pkl to allow the model to be copied into the container
+
 # Include the ML model if you want it in the image, otherwise exclude and mount.
 # Here we copy it in Dockerfile, so we don't ignore it unless we want to rebuild efficiently.
