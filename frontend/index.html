@@ -27,8 +27,11 @@
     </div>
   </div>
 
+  <!-- ══ SIDEBAR OVERLAY (MOBILE) ════════════════════════════ -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+
   <!-- ══ SIDEBAR ══════════════════════════════════════════════ -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="logo">
       <div class="logo-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round">
@@ -99,10 +102,20 @@
 
   <!-- ══ CHAT AREA ═════════════════════════════════════════════ -->
   <main class="chat-area">
-    <header class="chat-header"
-      style="justify-content: space-between; align-items: center; display: flex; width: 100%;">
-      <div>
-        <div class="chat-header-title">AI Study Assistant</div>
+    <header class="chat-header">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button class="menu-btn" onclick="toggleSidebar(true)" id="mobile-menu-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <div>
+          <div class="chat-header-title">AI Study Assistant</div>
+          <div class="chat-header-sub">Empowering your academic journey</div>
+        </div>
       </div>
       <div style="display: flex; align-items: center; gap: 16px;">
         <button onclick="openGraphModal()"

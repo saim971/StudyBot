@@ -284,6 +284,23 @@ async function checkServerStatus() {
   }
 }
 
+// ── MOBILE SIDEBAR TOGGLE ───────────────────────────────────────────────────
+function toggleSidebar(show) {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebar-overlay");
+  if (!sidebar || !overlay) return;
+  
+  if (show) {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden"; 
+  } else {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+}
+
 // ── WELCOME MESSAGE ────────────────────────────────────────────────────────────
 window.addEventListener("DOMContentLoaded", () => {
   // Start health check
