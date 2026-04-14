@@ -1,0 +1,22 @@
+# Exclude large datasets
+backend/student_performance.csv
+
+# Exclude local environment files
+backend/.env
+.env
+__pycache__
+*.pyc
+
+# Exclude Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+backend/Dockerfile
+backend/.dockerignore
+
+# Exclude Git files
+.git
+.gitignore
+
+# Exclude model training scripts (optional, but saves space)
+backend/train_model.py

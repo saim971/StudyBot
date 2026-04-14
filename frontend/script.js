@@ -1,9 +1,7 @@
-// ── CONFIG ────────────────────────────────────────────────────────────────────
-// Change this if your backend runs on a different host/port
-// Change this for production — Replace YOUR_RENDER_URL with your actual Render deployment URL
+// Change this for production — Using Vercel's relative /api path
 const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-  ? "http://localhost:8000"
-  : "https://studybot-1-0zp6.onrender.com"; // Live Render backend
+  ? (window.location.port === "3000" ? "/api" : "http://localhost:8000")
+  : "/api";
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let conversationHistory = [];
@@ -259,8 +257,39 @@ function formatMarkdown(text) {
     .replace(/\n/g, "<br/>");
 }
 
+// ── SERVER HEALTH CHECK ────────────────────────────────────────────────────────
+let healthCheckInterval = null;
+
+async function checkServerStatus() {
+  const dot = document.querySelector(".status-dot");
+  if (!dot) return;
+
+  try {
+    const start = Date.now();
+    const resp = await fetch(`${API_BASE}/health`, { method: "GET", signal: AbortSignal.timeout(5000) });
+    const latency = Date.now() - start;
+
+    if (resp.ok) {
+      dot.style.background = "var(--grade-a)";
+      dot.style.boxShadow = "0 0 0 3px rgba(34, 197, 94, .2)";
+      dot.title = `Online (${latency}ms)`;
+    } else {
+      throw new Error("Offline");
+    }
+  } catch (e) {
+    dot.style.background = "var(--grade-f)";
+    dot.style.boxShadow = "0 0 0 3px rgba(239, 68, 68, .2)";
+    dot.title = "Offline - Check your backend server";
+    console.warn("Backend unreachable:", API_BASE);
+  }
+}
+
 // ── WELCOME MESSAGE ────────────────────────────────────────────────────────────
 window.addEventListener("DOMContentLoaded", () => {
+  // Start health check
+  checkServerStatus();
+  healthCheckInterval = setInterval(checkServerStatus, 15000);
+
   setTimeout(() => {
     addBotMessage("👋 Hi there! I'm StudyBot. **Set your metrics** on the left panel and click **Predict My Grade** to get started. Then ask me anything — like:\n\n- *I'm weak in Mathematics*\n- *Give me Physics notes*\n- *How can I study better?*\n\nI'll fetch the best resources and guide you step by step! 🚀");
   }, 400);

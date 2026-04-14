@@ -27,7 +27,8 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY", "your-groq-api-key")
 GOOGLE_API_KEY    = os.getenv("GOOGLE_API_KEY", "your-google-api-key")
 GOOGLE_CSE_ID     = os.getenv("GOOGLE_CSE_ID", "your-cse-id")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, os.getenv("MODEL_PATH", "grade_model.pkl"))
+MODEL_NAME = os.getenv("MODEL_PATH", "grade_model.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, MODEL_NAME)
 
 
 groq_client = Groq(api_key=GROQ_API_KEY)
