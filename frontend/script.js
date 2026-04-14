@@ -3,7 +3,7 @@
 // Change this for production — Replace YOUR_RENDER_URL with your actual Render deployment URL
 const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
   ? "http://localhost:8000"
-  : "https://studybot-1-0zp6.onrender.com"; 
+  : "https://studybot-1-0zp6.onrender.com"; // Live Render backend
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let conversationHistory = [];
